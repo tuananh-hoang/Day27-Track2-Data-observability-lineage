@@ -1,0 +1,26 @@
+services:
+  airflow:
+    image: apache/airflow:2.10.5-python3.12
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "true"
+      PYTHONPATH: /opt/airflow
+    ports:
+      - "8080:8080"
+    volumes:
+      - airflow_home:/opt/airflow
+      - ./starter_project/dags:/opt/airflow/dags
+      - ./starter_project/src:/opt/airflow/src
+      - ./starter_project/data:/opt/airflow/data
+      - ./starter_project/output:/opt/airflow/output
+      - ./.env:/opt/airflow/.env:ro
+    command: standalone
+
+volumes:
+  airflow_home:
