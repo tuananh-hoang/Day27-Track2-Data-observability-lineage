@@ -1,5 +1,5 @@
 # Sales Data Quality Lab Report
-
+> Họ và tên: Hoàng Tuấn Anh - 2A202600075
 ## Overview
 
 This project implements a small Apache Airflow data-quality pipeline for sales order data. The pipeline reads an input CSV file, validates the data against business rules, writes a JSON validation summary, and fails the task when invalid data is detected.
